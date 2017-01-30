@@ -1,8 +1,6 @@
 # Local/private config goes in the include
 [include]
         path = ~/.gitconfig.local
-[hub]
-        protocol = https
 [alias]
         co = checkout
         promote = !$ZSH/bin/git-promote
@@ -19,10 +17,25 @@
         editor = vim
 [apply]
         whitespace = nowarn
-[mergetool]
+[merge]
         keepBackup = false
+        tool = p4merge
+[mergetool]
+        prompt = false
+[mergetool "p4merge"]
+        cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+        keepTemporaries = false
+        trustExitCode = false
+        keepBackup = false
+[diff]
+        tool = p4merge
 [difftool]
         prompt = false
+[difftool "p4merge"]
+        cmd = p4merge "$LOCAL" "$REMOTE"
+        keepTemporaries = false
+        trustExitCode = false
+        keepBackup = false
 [help]
         autocorrect = 1
 [push]
@@ -30,4 +43,5 @@
         # for more information on different options of the below setting.
         #
         # Setting to git 2.0 default to suppress warning message
-        default = simple
+        #default = simple
+        default = current
