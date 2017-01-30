@@ -4,13 +4,21 @@
 #
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
+
 export ZSH=$HOME/.dotfiles
 
+UNAME=`uname -s`
+
 # Set macOS defaults
-$ZSH/macos/set-defaults.sh
+if [ "$UNAME" = "Darwin" ]; then
+    $ZSH/macos/set-defaults.sh
+fi
 
 # Install homebrew
 $ZSH/homebrew/install.sh 2>&1
+
+# This was missing for Linuxbrew
+export PATH="$HOME/.linuxbrew/bin:$PATH"
 
 # Upgrade homebrew
 echo "› brew update"
